@@ -1,6 +1,5 @@
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { HallService } from './hall.service';
-import { create } from 'domain';
 import { CreateHallDto } from './dto/create-hall.dto';
 import { Hall } from './entity/hall.entity';
 import { Roles } from '../../shared/decorators/roles.decorator';
@@ -20,6 +19,7 @@ export class HallController {
     }
 
     @Get()
+    //@UseGuards(AuthGuard('jwt'))
     findAll() : Promise<Hall[]> {
       return this.hallService.findAll();
     }

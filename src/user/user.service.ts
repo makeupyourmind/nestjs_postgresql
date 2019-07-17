@@ -62,6 +62,12 @@ export class UserService {
     }
 
     async findById(id: number): Promise<User>{
-        return await this.userModel.findOne(id)
+        try {
+            return await this.userModel.findOne(id)
+        } catch (error) {
+            throw new HttpException({
+                error: error.message
+            }, HttpStatus.BAD_REQUEST)
+        }
     }
 }

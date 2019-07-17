@@ -1,6 +1,5 @@
 import { Injectable, NestMiddleware, Req, UseGuards, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { AuthGuard } from '@nestjs/passport';
 import { UserService } from '../../src/user/user.service';
 import * as jwt from 'jsonwebtoken';
 import config from '../../config/keys'
