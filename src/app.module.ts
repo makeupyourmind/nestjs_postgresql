@@ -5,6 +5,7 @@ import { HallModule } from './hall/hall.module';
 import { CheckAuthMiddleware } from '../shared/middleware/checkAuth.middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TicketModule } from './ticket/ticket.module';
 
 @Module({
   imports: [
@@ -19,16 +20,17 @@ import { AppService } from './app.service';
       synchronize: true,
     }),
     UserModule,
-    HallModule
+    HallModule,
+    TicketModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-// export class AppModule {}
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(CheckAuthMiddleware)
-      .forRoutes({ path: 'hall', method: RequestMethod.GET });
-  }
-}
+export class AppModule {}
+// export class AppModule implements NestModule {
+//   configure(consumer: MiddlewareConsumer) {
+//     consumer
+//       .apply(CheckAuthMiddleware)
+//       .forRoutes({ path: 'hall', method: RequestMethod.GET });
+//   }
+// }

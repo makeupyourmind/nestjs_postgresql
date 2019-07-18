@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Ticket } from '../../ticket/entity/ticket.entity';
 
 @Entity()
 export class Hall {
@@ -14,4 +15,7 @@ export class Hall {
   @Column({ length: 100, default: "" })
   imageURL: string;
 
+  @OneToMany(type => Ticket, ticket => ticket.id)
+  tickets: Ticket[];
+  
 }

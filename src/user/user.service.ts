@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,7 @@ export class UserService {
     private readonly jwtService: JwtService
   ) {}
     
-    async create(user: User): Promise<User>{
+    async create(user: CreateUserDto): Promise<User>{
       try {
         user.password = await this.getHash(user.password);
         return await this.userModel.save(user)
@@ -25,7 +26,7 @@ export class UserService {
       }
     }
 
-    async read(user: User): Promise <any>{
+    async read(user: CreateUserDto): Promise <any>{
         try {
             let response = await this.userModel.findOne({email: user.email})
             if(response !== null && await this.compareHash(user.password,response.password)){
@@ -54,10 +55,10 @@ export class UserService {
     }
       
     async compareHash(password: string | undefined, hash: string | undefined): Promise<boolean> {
-        return bcrypt.compare(password, hash);
+        return await bcrypt.compare(password, hash);
     }
   
-    async validateUser(payload: User): Promise<any> {
+    async validateUser(payload: CreateUserDto): Promise<any> {
         return await this.userModel.findOne(payload.id);
     }
 
