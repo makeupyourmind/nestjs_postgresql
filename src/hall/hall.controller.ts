@@ -47,4 +47,5 @@ export class HallController {
     deleteAll(){
       return this.hallService.deleteAll();
     }
+    
 }
