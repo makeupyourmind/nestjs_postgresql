@@ -15,7 +15,7 @@ export class Hall {
   @Column({ length: 100, default: "" })
   imageURL: string;
 
-  @OneToMany(type => Ticket, ticket => ticket.id)
+  @OneToMany(type => Ticket, ticket => ticket.hall)
   tickets: Ticket[];
   
 }

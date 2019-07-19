@@ -7,17 +7,22 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TicketModule } from './ticket/ticket.module';
 import { TestMiddleware } from '../shared/middleware/test.middleware';
-import { TicketController } from './ticket/ticket.controller';
+import { OfferModule } from './offer/offer.module';
+import { TradeController } from './trade/trade.controller';
+import { TradeService } from './trade/trade.service';
+import { TradeModule } from './trade/trade.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
     UserModule,
     HallModule,
-    TicketModule
+    TicketModule,
+    OfferModule,
+    TradeModule
   ],
-  controllers: [AppController],
-  providers: [AppService]
+  controllers: [],
+  providers: []
 })
 //export class AppModule {}
 export class AppModule implements NestModule {
