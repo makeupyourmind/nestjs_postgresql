@@ -24,6 +24,11 @@ export class HallController {
       return this.hallService.findAll();
     }
 
+    @Get(':id')
+    findById(@Param('id') id) : Promise<Hall> {
+      return this.hallService.findById(id);
+    }
+
     @Put(':id')
     update(@Body() updateHallDto: CreateHallDto, @Param('id') id: number): Promise<Hall>{
       return this.hallService.update(id, updateHallDto);

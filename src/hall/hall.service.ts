@@ -24,6 +24,10 @@ export class HallService {
     async findAll(): Promise <Hall[]>{
         return await this.hallModel.find()
     }
+    
+    async findById(id: number): Promise<Hall>{
+        return await this.hallModel.findOne(id)
+    }
 
     async update(id: number, hall: CreateHallDto): Promise<Hall>{
         const toUpdate = await this.hallModel.findOne({id})

@@ -6,31 +6,33 @@ import { CheckAuthMiddleware } from '../shared/middleware/checkAuth.middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TicketModule } from './ticket/ticket.module';
+import { TestMiddleware } from '../shared/middleware/test.middleware';
+import { TicketController } from './ticket/ticket.controller';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'AZ69295',
-      database: 'testdb',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
     UserModule,
     HallModule,
     TicketModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
-export class AppModule {}
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer
-//       .apply(CheckAuthMiddleware)
-//       .forRoutes({ path: 'hall', method: RequestMethod.GET });
-//   }
-// }
+//export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(CheckAuthMiddleware)
+      // .exclude(//исключить
+      //   {path: 'tickets/:id', method: RequestMethod.DELETE}
+      // )
+      // .forRoutes(TicketController);
+      .forRoutes(
+        { path: 'tickets/:id', method: RequestMethod.DELETE }
+      );
+    // consumer
+    //   .apply(TestMiddleware)
+    //   .forRoutes({ path: 'halls', method: RequestMethod.GET })
+  }
+}

@@ -22,6 +22,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new ValidationExceptionFilter());
-  await app.listen(3000, () => console.log("App listening on PORT 3000"));
+  await app.listen(3002, () => console.log("App listening on PORT 3002"));
 }
 bootstrap();
