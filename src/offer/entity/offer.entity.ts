@@ -21,6 +21,4 @@ export class Offer {
 
   @OneToMany(type => Trade, trade => trade.offer) // note: we will create author property in the Photo class below
   trades: Trade[];
-
-
 }

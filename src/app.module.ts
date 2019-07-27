@@ -3,14 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { HallModule } from './hall/hall.module';
 import { CheckAuthMiddleware } from '../shared/middleware/checkAuth.middleware';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TicketModule } from './ticket/ticket.module';
 import { TestMiddleware } from '../shared/middleware/test.middleware';
 import { OfferModule } from './offer/offer.module';
-import { TradeController } from './trade/trade.controller';
-import { TradeService } from './trade/trade.service';
 import { TradeModule } from './trade/trade.module';
+import { AlbumModule } from './album/album.module';
+import { PhotoModule } from './photo/photo.module';
 
 @Module({
   imports: [
@@ -19,7 +17,9 @@ import { TradeModule } from './trade/trade.module';
     HallModule,
     TicketModule,
     OfferModule,
-    TradeModule
+    TradeModule,
+    AlbumModule,
+    PhotoModule
   ],
   controllers: [],
   providers: []
